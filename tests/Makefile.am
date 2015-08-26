@@ -27,20 +27,22 @@ AM_TESTS_ENVIRONMENT = CUTTER="$(CUTTER)" XSLTPROC="$(XSLTPROC)" VALGRIND="$(VAL
 
 AM_LDFLAGS = -module -rpath $(libdir) -avoid-version -no-undefined
 
-AM_CPPFLAGS = $(CUTTER_CFLAGS)
+AM_CPPFLAGS = $(CPPCUTTER_CFLAGS)
 AM_CPPFLAGS += -I$(top_srcdir)
+AM_CPPFLAGS += -I$(top_srcdir)/dbus_interfaces
 
 AM_CFLAGS = $(CWARNINGS)
 
 AM_CXXFLAGS = $(CXXWARNINGS)
 
-LIBS += $(CUTTER_LIBS)
+LIBS += $(CPPCUTTER_LIBS)
 
-check_LTLIBRARIES = test_dummy.la
+check_LTLIBRARIES = test_events.la
 
-test_dummy_la_SOURCES = test_dummy.cc
-test_dummy_la_CFLAGS = $(AM_CFLAGS)
-test_dummy_la_CXXFLAGS = $(AM_CXXFLAGS)
+test_events_la_SOURCES = test_events.cc
+test_events_la_CFLAGS = $(AM_CFLAGS)
+test_events_la_CXXFLAGS = $(AM_CXXFLAGS)
+test_events_la_LIBADD = ../libevents.la
 
 CLEANFILES = test_report.xml test_report_junit.xml valgrind.xml
 

@@ -16,15 +16,30 @@
  * along with D-Bus DL.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#if HAVE_CONFIG_H
-#include <config.h>
-#endif /* HAVE_CONFIG_H */
+#ifndef XFERITEM_H
+#define XFERITEM_H
 
-#include <cppcutter.h>
+#include <stdint.h>
 
-namespace dummy_tests
+struct XferItem
 {
+    uint32_t item_id;
+    uint32_t total_ticks;
+    char *url;
+};
 
-void test_dummy() {}
+#ifdef __cplusplus
+extern "C" {
+#endif
 
+void xferitem_init(const char *download_path);
+void xferitem_deinit(void);
+
+struct XferItem *xferitem_allocate(const char *url, uint32_t ticks);
+void xferitem_free(struct XferItem *item);
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif /* !XFERITEM_H */

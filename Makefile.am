@@ -32,7 +32,7 @@ AM_CXXFLAGS = $(CXXWARNINGS)
 
 bin_PROGRAMS = dbusdl
 
-noinst_LTLIBRARIES = libfiletransfer_dbus.la
+noinst_LTLIBRARIES = libfiletransfer_dbus.la libevents.la
 
 dbusdl_SOURCES = \
     dbusdl.c \
@@ -45,6 +45,8 @@ dbusdl_LDADD = $(noinst_LTLIBRARIES) $(DBUSDL_DEPENDENCIES_LIBS)
 
 nodist_libfiletransfer_dbus_la_SOURCES = filetransfer_dbus.c filetransfer_dbus.h
 libfiletransfer_dbus_la_CFLAGS = $(CRELAXEDWARNINGS)
+
+libevents_la_SOURCES = events.c events.h xferitem.c xferitem.h
 
 html_DATA = README.html
 
