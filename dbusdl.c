@@ -23,9 +23,21 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
 
+#include <glib-unix.h>
 #include "messages.h"
 #include "versioninfo.h"
+
+static GMainLoop *create_glib_main_loop(void)
+{
+    GMainLoop *loop = g_main_loop_new(NULL, FALSE);
+
+    if(loop == NULL)
+        msg_error(ENOMEM, LOG_EMERG, "Failed creating GLib main loop");
+
+    return loop;
+}
 
 static void show_version_info(void)
 {
@@ -90,6 +102,18 @@ static int process_command_line(int argc, char *argv[],
     return 0;
 }
 
+static gboolean signal_handler(gpointer user_data)
+{
+    g_main_loop_quit((GMainLoop *)user_data);
+    return G_SOURCE_REMOVE;
+}
+
+static void connect_unix_signals(GMainLoop *loop)
+{
+    g_unix_signal_add(SIGINT, signal_handler, loop);
+    g_unix_signal_add(SIGTERM, signal_handler, loop);
+}
+
 int main(int argc, char *argv[])
 {
     bool run_in_foreground;
@@ -110,6 +134,13 @@ int main(int argc, char *argv[])
 
     if(setup(run_in_foreground) < 0)
         return EXIT_FAILURE;
+
+    GMainLoop *loop = create_glib_main_loop();
+
+    connect_unix_signals(loop);
+    g_main_loop_run(loop);
+
+    msg_info("Shutting down");
 
     return EXIT_SUCCESS;
 }
