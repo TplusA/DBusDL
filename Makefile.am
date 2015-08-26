@@ -47,7 +47,7 @@ libfiletransfer_dbus_la_CFLAGS = $(CRELAXEDWARNINGS)
 
 html_DATA = README.html
 
-EXTRA_DIST = README.md
+EXTRA_DIST = README.md cppcheck_suppressed.txt
 
 CLEANFILES = README.html
 

@@ -23,7 +23,7 @@ if WITH_VALGRIND
 TESTS += valgrind.sh
 endif
 
-AM_TESTS_ENVIRONMENT = CUTTER="$(CUTTER)" XSLTPROC="$(XSLTPROC)"
+AM_TESTS_ENVIRONMENT = CUTTER="$(CUTTER)" XSLTPROC="$(XSLTPROC)" VALGRIND="$(VALGRIND)"
 
 AM_LDFLAGS = -module -rpath $(libdir) -avoid-version -no-undefined
 
@@ -32,11 +32,20 @@ AM_CPPFLAGS += -I$(top_srcdir)
 
 AM_CFLAGS = $(CWARNINGS)
 
+AM_CXXFLAGS = $(CXXWARNINGS)
+
 LIBS += $(CUTTER_LIBS)
 
-CLEANFILES = test_report.xml test_report_junit.xml
+check_LTLIBRARIES = test_dummy.la
+
+test_dummy_la_SOURCES = test_dummy.cc
+test_dummy_la_CFLAGS = $(AM_CFLAGS)
+test_dummy_la_CXXFLAGS = $(AM_CXXFLAGS)
+
+CLEANFILES = test_report.xml test_report_junit.xml valgrind.xml
 
 EXTRA_DIST = cutter2junit.xslt
+EXTRA_DIST += cutter-1_2_4.supp cutter-children-1_2_4.supp
 
 check-local: check-TESTS
 	@if $(GREP) -w cutter $(TEST_LOGS); then \
