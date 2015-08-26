@@ -63,6 +63,15 @@ static int setup(bool run_in_foreground)
     if(!run_in_foreground)
         openlog("dbusdl", LOG_PID, LOG_DAEMON);
 
+    if(!run_in_foreground)
+    {
+        if(daemon(0, 0) < 0)
+        {
+            msg_error(errno, LOG_EMERG, "Failed to run as daemon");
+            return -1;
+        }
+    }
+
     log_version_info();
 
     return 0;
