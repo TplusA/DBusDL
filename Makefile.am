@@ -38,7 +38,8 @@ dbusdl_SOURCES = \
     dbusdl.c \
     messages.h messages.c \
     os.h os.c \
-    dbus_interfaces/de_tahifi_lists_errors.h
+    dbus_interfaces/de_tahifi_lists_errors.h \
+    dbus_iface.c dbus_iface.h
 
 dbusdl_LDADD = $(noinst_LTLIBRARIES) $(DBUSDL_DEPENDENCIES_LIBS)
 

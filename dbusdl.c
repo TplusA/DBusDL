@@ -26,6 +26,8 @@
 #include <errno.h>
 
 #include <glib-unix.h>
+
+#include "dbus_iface.h"
 #include "messages.h"
 #include "versioninfo.h"
 
@@ -146,10 +148,13 @@ int main(int argc, char *argv[])
 
     GMainLoop *loop = create_glib_main_loop();
 
+    dbus_setup(loop, "de.tahifi.DBusDL");
+
     connect_unix_signals(loop);
     g_main_loop_run(loop);
 
     msg_info("Shutting down");
+    dbus_shutdown(loop);
 
     return EXIT_SUCCESS;
 }
