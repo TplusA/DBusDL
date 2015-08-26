@@ -23,6 +23,7 @@
 #include <string.h>
 
 #include "dbus_iface.h"
+#include "dbus_handlers.h"
 #include "filetransfer_dbus.h"
 #include "messages.h"
 
@@ -64,6 +65,12 @@ static void bus_acquired(GDBusConnection *connection,
     msg_info("D-Bus \"%s\" acquired", name);
 
     data->filetransfer_iface = tdbus_file_transfer_skeleton_new();
+
+    g_signal_connect(data->filetransfer_iface, "handle-download",
+                     G_CALLBACK(dbusmethod_download_start), NULL);
+    g_signal_connect(data->filetransfer_iface, "handle-cancel",
+                     G_CALLBACK(dbusmethod_transfer_cancel), NULL);
+
     try_export_iface(connection, G_DBUS_INTERFACE_SKELETON(data->filetransfer_iface));
 }
 

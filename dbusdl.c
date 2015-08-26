@@ -28,6 +28,8 @@
 #include <glib-unix.h>
 
 #include "dbus_iface.h"
+#include "events.h"
+#include "xferthread.h"
 #include "messages.h"
 #include "versioninfo.h"
 
@@ -146,6 +148,11 @@ int main(int argc, char *argv[])
     if(setup(run_in_foreground) < 0)
         return EXIT_FAILURE;
 
+    /* TODO: Download path should be a command line parameter */
+    xferitem_init("/tmp/downloads");
+    events_init();
+    xferthread_init();
+
     GMainLoop *loop = create_glib_main_loop();
 
     dbus_setup(loop, "de.tahifi.DBusDL");
@@ -155,6 +162,10 @@ int main(int argc, char *argv[])
 
     msg_info("Shutting down");
     dbus_shutdown(loop);
+
+    xferthread_deinit();
+    events_deinit();
+    xferitem_deinit();
 
     return EXIT_SUCCESS;
 }

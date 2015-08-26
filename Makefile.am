@@ -36,10 +36,11 @@ noinst_LTLIBRARIES = libfiletransfer_dbus.la libevents.la
 
 dbusdl_SOURCES = \
     dbusdl.c \
+    events.h xferitem.h xferthread.c xferthread.h \
     messages.h messages.c \
     os.h os.c \
     dbus_interfaces/de_tahifi_lists_errors.h \
-    dbus_iface.c dbus_iface.h
+    dbus_iface.c dbus_iface.h dbus_handlers.c dbus_handlers.h
 
 dbusdl_LDADD = $(noinst_LTLIBRARIES) $(DBUSDL_DEPENDENCIES_LIBS)
 
