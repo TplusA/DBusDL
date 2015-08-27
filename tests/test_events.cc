@@ -54,7 +54,7 @@ void cut_setup()
 {
     event = nullptr;
     xferitem_init("/tmp/downloads", false);
-    events_init();
+    events_init(NULL);
 }
 
 void cut_teardown()
@@ -158,7 +158,7 @@ void cut_setup()
 {
     event = nullptr;
     xferitem_init("/tmp/downloads", false);
-    events_init();
+    events_init(NULL);
 }
 
 void cut_teardown()

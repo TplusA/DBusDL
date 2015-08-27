@@ -72,7 +72,7 @@ struct EventToUser
 extern "C" {
 #endif
 
-void events_init(void);
+void events_init(int (*to_user_queue_notification)(void *user_data));
 void events_deinit(void);
 
 struct EventFromUser *events_from_user_new_shutdown(void);

@@ -29,13 +29,15 @@ static struct
 {
     GAsyncQueue *from_user_to_thread_queue;
     GAsyncQueue *from_thread_to_user_queue;
+    GSourceFunc notify_to_user_queue;
 }
 events_data;
 
-void events_init(void)
+void events_init(GSourceFunc to_user_queue_notification)
 {
     events_data.from_user_to_thread_queue = g_async_queue_new();
     events_data.from_thread_to_user_queue = g_async_queue_new();
+    events_data.notify_to_user_queue = to_user_queue_notification;
 }
 
 void events_deinit(void)
@@ -176,6 +178,9 @@ void events_to_user_send(struct EventToUser *event)
     log_assert(event != NULL);
 
     g_async_queue_push(events_data.from_thread_to_user_queue, event);
+
+    if(events_data.notify_to_user_queue != NULL)
+        g_main_context_invoke(NULL, events_data.notify_to_user_queue, NULL);
 }
 
 struct EventToUser *events_to_user_receive(bool blocking)
