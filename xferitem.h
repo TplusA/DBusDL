@@ -27,6 +27,7 @@ struct XferItem
     uint32_t item_id;
     uint32_t total_ticks;
     char *url;
+    char *destfile_path;
 };
 
 #ifdef __cplusplus

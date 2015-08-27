@@ -21,6 +21,8 @@
 #endif /* HAVE_CONFIG_H */
 
 #include <cppcutter.h>
+#include <ios>
+#include <iomanip>
 
 #include "events.h"
 
@@ -33,6 +35,12 @@ static struct XferItem *mk_xferitem(const char *url, uint32_t ticks,
     cppcut_assert_equal(expected_item_id, item->item_id);
     cppcut_assert_equal(ticks, item->total_ticks);
     cppcut_assert_equal(url, item->url);
+
+    std::ostringstream os;
+    os << "/tmp/downloads/"
+       << std::dec << std::right << std::setw(10) << std::setfill('0')
+       << expected_item_id << ".dbusdl";
+    cppcut_assert_equal(os.str().c_str(), item->destfile_path);
 
     return item;
 }

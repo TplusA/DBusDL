@@ -86,8 +86,10 @@ struct XferItem *xferitem_allocate(const char *url, uint32_t ticks)
     item->item_id = next_id();
     item->total_ticks = ticks;
     item->url = g_strdup(url);
+    item->destfile_path =
+        construct_path(xferitem_data.download_path, item->item_id);
 
-    if(item->url == NULL)
+    if(item->url == NULL || item->destfile_path == NULL)
     {
         xferitem_free(item);
         return NULL;
@@ -102,5 +104,6 @@ void xferitem_free(struct XferItem *item)
         return;
 
     g_free(item->url);
+    g_free(item->destfile_path);
     g_free(item);
 }
