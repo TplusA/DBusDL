@@ -25,6 +25,7 @@
 #include "dbus_iface.h"
 #include "dbus_handlers.h"
 #include "filetransfer_dbus.h"
+#include "events.h"
 #include "messages.h"
 
 struct dbus_data
@@ -98,6 +99,48 @@ static void destroy_notification(gpointer user_data)
 }
 
 static struct dbus_data dbus_data;
+
+gboolean dbus_poll_event_queue(gpointer user_data)
+{
+    while(1)
+    {
+        struct EventToUser *event = events_to_user_receive(false);
+
+        if(event == NULL)
+            return G_SOURCE_REMOVE;
+
+        switch(event->event_id)
+        {
+          case EVENT_TO_USER_REPORT_PROGRESS:
+            {
+                const struct XferItem *item = event->xi.const_item;
+
+                tdbus_file_transfer_emit_progress(dbus_data.filetransfer_iface,
+                                                  item->item_id,
+                                                  event->d.tick,
+                                                  item->total_ticks);
+            }
+
+            break;
+
+          case EVENT_TO_USER_DONE:
+            {
+                const struct XferItem *item = event->xi.const_item;
+                const char *path = event->d.error_code == LIST_ERROR_OK
+                    ? item->destfile_path
+                    : "";
+
+                tdbus_file_transfer_emit_done(dbus_data.filetransfer_iface,
+                                              item->item_id,
+                                              event->d.error_code, path);
+            }
+
+            break;
+        }
+
+        events_to_user_free(event, false);
+    }
+}
 
 int dbus_setup(GMainLoop *loop, const char *bus_name)
 {

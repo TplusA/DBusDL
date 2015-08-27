@@ -27,6 +27,7 @@ extern "C" {
 
 int dbus_setup(GMainLoop *loop, const char *bus_name);
 void dbus_shutdown(GMainLoop *loop);
+gboolean dbus_poll_event_queue(gpointer user_data);
 
 #ifdef __cplusplus
 }

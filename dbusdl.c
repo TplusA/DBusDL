@@ -176,7 +176,7 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
 
     xferitem_init(parameters.download_path, true);
-    events_init(NULL);
+    events_init(dbus_poll_event_queue);
     xferthread_init();
 
     GMainLoop *loop = create_glib_main_loop();
