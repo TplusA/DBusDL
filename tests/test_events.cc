@@ -81,6 +81,9 @@ void test_new_start_download()
     cppcut_assert_not_null(event);
     cppcut_assert_equal(EVENT_FROM_USER_START_DOWNLOAD, event->event_id);
     cppcut_assert_equal(item, event->d.item);
+
+    xferitem_free(event->d.item);
+    event->d.item = NULL;
 }
 
 void test_new_cancel()
@@ -105,11 +108,12 @@ void test_send_one_event()
 
 void test_send_some_events()
 {
+    struct XferItem *item = mk_xferitem("foo", 400, 1);
     struct EventFromUser *events[] =
     {
+        events_from_user_new_start_download(item),
         events_from_user_new_cancel(80),
-        events_from_user_new_cancel(81),
-        events_from_user_new_cancel(82),
+        events_from_user_new_shutdown(),
     };
 
     for(const auto &ev : events)
@@ -123,6 +127,20 @@ void test_send_some_events()
         auto received = events_from_user_receive(false);
 
         cppcut_assert_equal(ev, received);
+
+        switch(ev->event_id)
+        {
+          case EVENT_FROM_USER_START_DOWNLOAD:
+            /* receiver of this event is expected to take ownership of the
+             * attached #XferItem */
+            xferitem_free(ev->d.item);
+            ev->d.item = NULL;
+            break;
+
+          case EVENT_FROM_USER_SHUTDOWN:
+          case EVENT_FROM_USER_CANCEL:
+            break;
+        }
 
         /* we own the event now, so we must free it */
         events_from_user_free(received);

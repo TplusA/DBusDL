@@ -138,7 +138,10 @@ void events_from_user_free(struct EventFromUser *event)
         break;
 
       case EVENT_FROM_USER_START_DOWNLOAD:
-        xferitem_free(event->d.item);
+        if(event->d.item != NULL)
+            msg_error(0, LOG_WARNING,
+                      "XferItem pointer in EventFromUser not NULL");
+
         break;
 
     }
