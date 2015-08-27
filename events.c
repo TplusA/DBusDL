@@ -50,6 +50,8 @@ static struct EventFromUser *alloc_from_user(enum EventFromUserID id)
 
     if(ev != NULL)
         ev->event_id = id;
+    else
+        msg_out_of_memory("EventFromUser");
 
     return ev;
 }
@@ -64,6 +66,8 @@ static struct EventToUser *alloc_to_user(enum EventToUserID id,
         ev->event_id = id;
         ev->item = item;
     }
+    else
+        msg_out_of_memory("EventToUser");
 
     return ev;
 }
