@@ -157,7 +157,7 @@ void test_new_report_progress()
 
     cppcut_assert_not_null(event);
     cppcut_assert_equal(EVENT_TO_USER_REPORT_PROGRESS, event->event_id);
-    cppcut_assert_equal(item, event->item);
+    cppcut_assert_equal(item, event->xi.const_item);
 }
 
 void test_new_done()
@@ -167,7 +167,7 @@ void test_new_done()
 
     cppcut_assert_not_null(event);
     cppcut_assert_equal(EVENT_TO_USER_DONE, event->event_id);
-    cppcut_assert_equal(item, event->item);
+    cppcut_assert_equal(item, event->xi.item);
 }
 
 void test_send_one_event()

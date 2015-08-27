@@ -52,7 +52,13 @@ enum EventToUserID
 struct EventToUser
 {
     enum EventToUserID event_id;
-    struct XferItem *item;
+
+    union
+    {
+        struct XferItem *item;
+        const struct XferItem *const_item;
+    }
+    xi;
 
     union
     {
@@ -76,7 +82,7 @@ void events_from_user_send(struct EventFromUser *event);
 struct EventFromUser *events_from_user_receive(bool blocking);
 void events_from_user_free(struct EventFromUser *event);
 
-struct EventToUser *events_to_user_new_report_progress(struct XferItem *item,
+struct EventToUser *events_to_user_new_report_progress(const struct XferItem *item,
                                                        uint32_t tick);
 struct EventToUser *events_to_user_new_done(struct XferItem *item,
                                             enum DBusListsErrorCode error_code);

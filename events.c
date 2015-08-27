@@ -56,15 +56,24 @@ static struct EventFromUser *alloc_from_user(enum EventFromUserID id)
     return ev;
 }
 
+/*!
+ * Allocate event sent to the user.
+ *
+ * \note
+ *     The #XferItem structure stores the \p item pointer in a union of
+ *     pointers to const and a non-const #XferItem. This function always
+ *     assigns to the const version under the assumption that both pointers in
+ *     the unions overlap exactly.
+ */
 static struct EventToUser *alloc_to_user(enum EventToUserID id,
-                                         struct XferItem *item)
+                                         const struct XferItem *item)
 {
     struct EventToUser *ev = g_try_malloc0(sizeof(*ev));
 
     if(ev != NULL)
     {
         ev->event_id = id;
-        ev->item = item;
+        ev->xi.const_item = item;
     }
     else
         msg_out_of_memory("EventToUser");
@@ -137,7 +146,7 @@ void events_from_user_free(struct EventFromUser *event)
     g_free(event);
 }
 
-struct EventToUser *events_to_user_new_report_progress(struct XferItem *item,
+struct EventToUser *events_to_user_new_report_progress(const struct XferItem *item,
                                                        uint32_t tick)
 {
     struct EventToUser *ev = alloc_to_user(EVENT_TO_USER_REPORT_PROGRESS, item);
@@ -181,16 +190,18 @@ void events_to_user_free(struct EventToUser *event, bool force_free_xferitem)
        return;
 
     if(force_free_xferitem)
-        xferitem_free(event->item);
+        xferitem_free(event->xi.item);
     else
     {
         switch(event->event_id)
         {
           case EVENT_TO_USER_REPORT_PROGRESS:
+            /* the #XferItem object must remain intact because this event does
+             * not own the object, it only references to it for reading */
             break;
 
           case EVENT_TO_USER_DONE:
-            xferitem_free(event->item);
+            xferitem_free(event->xi.item);
             break;
         }
     }
