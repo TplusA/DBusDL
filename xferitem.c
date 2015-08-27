@@ -39,7 +39,7 @@ static char *construct_path(const char *prefix, uint32_t id)
     char buffer[32];
     g_snprintf(buffer, sizeof(buffer), "%010u.dbusdl", id);
 
-    return g_build_path(prefix, buffer, NULL);
+    return g_build_filename(prefix, buffer, NULL);
 }
 
 static uint32_t next_id(void)
