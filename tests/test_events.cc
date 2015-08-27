@@ -230,3 +230,24 @@ void test_send_some_events()
 }
 
 }
+
+namespace xferitem_tests
+{
+
+void cut_setup()
+{
+    xferitem_init("/this/is/my/directory", false);
+}
+
+void cut_teardown()
+{
+    xferitem_deinit();
+}
+
+void test_path_to_temporary_download_file_can_be_retrieved()
+{
+    cppcut_assert_equal("/this/is/my/directory/0000000000.dbusdl",
+                        xferitem_get_tempfile_path());
+}
+
+}

@@ -107,3 +107,9 @@ void xferitem_free(struct XferItem *item)
     g_free(item->destfile_path);
     g_free(item);
 }
+
+const char *xferitem_get_tempfile_path(void)
+{
+    log_assert(xferitem_data.tempfile_path != NULL);
+    return xferitem_data.tempfile_path;
+}

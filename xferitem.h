@@ -39,6 +39,7 @@ void xferitem_deinit(void);
 
 struct XferItem *xferitem_allocate(const char *url, uint32_t ticks);
 void xferitem_free(struct XferItem *item);
+const char *xferitem_get_tempfile_path(void);
 
 #ifdef __cplusplus
 }
