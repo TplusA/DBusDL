@@ -16,7 +16,7 @@
 # along with D-Bus DL.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-SUBDIRS = . tests
+SUBDIRS = . dist tests
 
 ACLOCAL_AMFLAGS = -I m4
 

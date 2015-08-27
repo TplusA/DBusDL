@@ -93,7 +93,7 @@ AC_TYPE_SIZE_T
 AM_CONDITIONAL([WITH_CUTTER], [test "x$ac_cv_use_cutter" = "xyes"])
 AM_CONDITIONAL([WITH_VALGRIND], [test "x$enable_valgrind" = "xyes"])
 
-AC_CONFIG_FILES([Makefile tests/Makefile Doxyfile])
+AC_CONFIG_FILES([Makefile dist/Makefile tests/Makefile Doxyfile])
 AC_CONFIG_FILES([versioninfo.cache])
 AC_CONFIG_FILES([tests/run_test.sh], [chmod +x tests/run_test.sh])
 AC_CONFIG_FILES([tests/valgrind.sh], [chmod +x tests/valgrind.sh])
