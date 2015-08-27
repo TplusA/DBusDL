@@ -93,4 +93,3 @@ gboolean dbusmethod_transfer_cancel(tdbusFileTransfer *object,
 
     return TRUE;
 }
-
