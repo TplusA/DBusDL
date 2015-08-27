@@ -20,6 +20,7 @@
 #define XFERITEM_H
 
 #include <stdint.h>
+#include <stdbool.h>
 
 struct XferItem
 {
@@ -32,7 +33,7 @@ struct XferItem
 extern "C" {
 #endif
 
-void xferitem_init(const char *download_path);
+void xferitem_init(const char *download_path, bool create_path);
 void xferitem_deinit(void);
 
 struct XferItem *xferitem_allocate(const char *url, uint32_t ticks);

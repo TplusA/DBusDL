@@ -21,6 +21,7 @@
 #endif /* HAVE_CONFIG_H */
 
 #include <glib.h>
+#include <errno.h>
 
 #include "xferitem.h"
 #include "messages.h"
@@ -51,11 +52,20 @@ static uint32_t next_id(void)
     return id;
 }
 
-void xferitem_init(const char *download_path)
+void xferitem_init(const char *download_path, bool create_path)
 {
+    log_assert(download_path != NULL);
+
     xferitem_data.download_path = download_path;
     xferitem_data.tempfile_path = construct_path(download_path, 0);
     xferitem_data.next_free_id = 1;
+
+    if(create_path &&
+       g_mkdir_with_parents(xferitem_data.download_path, 0770) < 0)
+    {
+        msg_error(errno, LOG_ERR, "Failed creating directory \"%s\".",
+                  xferitem_data.download_path);
+    }
 }
 
 void xferitem_deinit(void)

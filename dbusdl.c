@@ -88,14 +88,34 @@ static void usage(const char *program_name)
            "Options:\n"
            "  --help         Show this help.\n"
            "  --version      Print version information to stdout.\n"
-           "  --fg           Run in foreground, don't run as daemon.\n",
+           "  --fg           Run in foreground, don't run as daemon.\n"
+           "  --tmpdir PATH  Download files to directory PATH.\n",
            program_name);
 }
 
-static int process_command_line(int argc, char *argv[],
-                                bool *run_in_foreground)
+struct Parameters
 {
-    *run_in_foreground = false;
+    bool run_in_foreground;
+    const char *download_path;
+};
+
+static int process_command_line(int argc, char *argv[],
+                                struct Parameters *parameters)
+{
+    parameters->run_in_foreground = false;
+    parameters->download_path = "/tmp/downloads";
+
+#define CHECK_ARGUMENT() \
+    do \
+    { \
+        if(i + 1 >= argc) \
+        { \
+            fprintf(stderr, "Option %s requires an argument.\n", argv[i]); \
+            return -1; \
+        } \
+        ++i; \
+    } \
+    while(0)
 
     for(int i = 1; i < argc; ++i)
     {
@@ -104,13 +124,20 @@ static int process_command_line(int argc, char *argv[],
         else if(strcmp(argv[i], "--version") == 0)
             return 2;
         else if(strcmp(argv[i], "--fg") == 0)
-            *run_in_foreground = true;
+            parameters->run_in_foreground = true;
+        else if(strcmp(argv[i], "--tmpdir") == 0)
+        {
+            CHECK_ARGUMENT();
+            parameters->download_path = argv[i];
+        }
         else
         {
             fprintf(stderr, "Unknown option \"%s\". Please try --help.\n", argv[i]);
             return -1;
         }
     }
+
+#undef CHECK_ARGUMENT
 
     return 0;
 }
@@ -129,8 +156,8 @@ static void connect_unix_signals(GMainLoop *loop)
 
 int main(int argc, char *argv[])
 {
-    bool run_in_foreground;
-    int ret = process_command_line(argc, argv, &run_in_foreground);
+    static struct Parameters parameters;
+    int ret = process_command_line(argc, argv, &parameters);
 
     if(ret == -1)
         return EXIT_FAILURE;
@@ -145,11 +172,10 @@ int main(int argc, char *argv[])
         return EXIT_SUCCESS;
     }
 
-    if(setup(run_in_foreground) < 0)
+    if(setup(parameters.run_in_foreground) < 0)
         return EXIT_FAILURE;
 
-    /* TODO: Download path should be a command line parameter */
-    xferitem_init("/tmp/downloads");
+    xferitem_init(parameters.download_path, true);
     events_init();
     xferthread_init();
 

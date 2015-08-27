@@ -45,7 +45,7 @@ static struct EventFromUser *event;
 void cut_setup()
 {
     event = nullptr;
-    xferitem_init("/tmp/downloads");
+    xferitem_init("/tmp/downloads", false);
     events_init();
 }
 
@@ -131,7 +131,7 @@ static struct EventToUser *event;
 void cut_setup()
 {
     event = nullptr;
-    xferitem_init("/tmp/downloads");
+    xferitem_init("/tmp/downloads", false);
     events_init();
 }
 
