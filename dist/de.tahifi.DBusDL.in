@@ -1,4 +1,4 @@
 [D-BUS Service]
-Name=de.tahifi.FileTransfer
+Name=de.tahifi.DBusDL
 Exec=@bindir@/dbusdl
 User=strbo

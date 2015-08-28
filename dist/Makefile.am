@@ -18,7 +18,7 @@
 
 dbusservicedir = $(datadir)/dbus-1/services
 
-dbusservice_in_files = de.tahifi.FileTransfer.in
+dbusservice_in_files = de.tahifi.DBusDL.in
 
 dbusservice_DATA = $(dbusservice_in_files:.in=.service)
 
