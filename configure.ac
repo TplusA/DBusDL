@@ -15,7 +15,7 @@ dnl You should have received a copy of the GNU General Public License
 dnl along with D-Bus DL.  If not, see <http://www.gnu.org/licenses/>.
 
 AC_PREREQ([2.69])
-AC_INIT([D-Bus DL], [1.0], [r.tiemann@ta-hifi.com])
+AC_INIT([D-Bus DL], [1.1], [r.tiemann@ta-hifi.com])
 AC_CONFIG_AUX_DIR([config])
 AM_INIT_AUTOMAKE([1.11 -Wall -Werror foreign])
 AM_SILENT_RULES([yes])

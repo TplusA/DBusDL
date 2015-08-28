@@ -1,3 +1,10 @@
+2015-10-20  Robert Tiemann  <r.tiemann@ta-hifi.de>
+
+	* Version 1.1 released.
+
+	* Fix compiler warning: Support a new error code introduced in
+	  libcurl 7.39.0, keep compatibility with libcurl 7.38.0 and below.
+
 2015-08-28  Robert Tiemann  <r.tiemann@ta-hifi.de>
 
 	* Version 1.0 released.
