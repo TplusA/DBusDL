@@ -51,7 +51,7 @@ libevents_la_SOURCES = events.c events.h xferitem.c xferitem.h
 
 html_DATA = README.html
 
-EXTRA_DIST = README.md cppcheck_suppressed.txt
+EXTRA_DIST = README.md
 
 CLEANFILES = README.html
 
