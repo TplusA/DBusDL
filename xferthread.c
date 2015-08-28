@@ -112,7 +112,8 @@ static int progress_callback(void *clientp,
        tick <= data->current_xfer->total_ticks)
     {
         msg_info("Download progress %u/%u (%lu/%lu bytes)",
-                 tick, data->current_xfer->total_ticks, dlnow, dltotal);
+                 tick, data->current_xfer->total_ticks,
+                 (unsigned long)dlnow, (unsigned long)dltotal);
         send_progress_report(data->current_xfer, tick);
         data->previously_sent_tick = tick;
     }
