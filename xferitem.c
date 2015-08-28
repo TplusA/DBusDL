@@ -81,7 +81,10 @@ struct XferItem *xferitem_allocate(const char *url, uint32_t ticks)
     struct XferItem *const item = g_try_malloc(sizeof(*item));
 
     if(item == NULL)
+    {
+        msg_out_of_memory("XferItem");
         return NULL;
+    }
 
     item->item_id = next_id();
     item->total_ticks = ticks;
