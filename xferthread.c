@@ -213,6 +213,9 @@ static enum DBusListsErrorCode map_curl_error_to_list_error(CURLcode error)
       case CURLE_TFTP_PERM:
       case CURLE_TFTP_NOSUCHUSER:
       case CURLE_SSL_ISSUER_ERROR:
+#if LIBCURL_VERSION_NUM >= 0x072700
+      case CURLE_SSL_PINNEDPUBKEYNOTMATCH:
+#endif /* version 7.39.0 and up */
         return LIST_ERROR_AUTHENTICATION;
 
       case CURLE_FAILED_INIT:
