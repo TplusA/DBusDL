@@ -28,7 +28,7 @@ static void enter_handler(GDBusMethodInvocation *invocation)
 {
     static const char iface_name[] = "de.tahifi.FileTransfer";
 
-    msg_info("%s signal from '%s': %s",
+    msg_info("%s method invocation from '%s': %s",
              iface_name, g_dbus_method_invocation_get_sender(invocation),
              g_dbus_method_invocation_get_method_name(invocation));
 }
