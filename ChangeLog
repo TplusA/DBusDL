@@ -1,3 +1,9 @@
+2015-12-07  Robert Tiemann  <r.tiemann@ta-hifi.de>
+
+	* Version 1.2 released.
+
+	* HTTP: Set maximum number of redirects to 2.
+
 2015-10-20  Robert Tiemann  <r.tiemann@ta-hifi.de>
 
 	* Version 1.1 released.
