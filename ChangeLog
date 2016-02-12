@@ -1,3 +1,9 @@
+2016-02-12  Robert Tiemann  <r.tiemann@ta-hifi.de>
+
+	* Version 1.3 released.
+
+	* Bug fix: Avoid log disruption by very long messages.
+
 2015-12-07  Robert Tiemann  <r.tiemann@ta-hifi.de>
 
 	* Version 1.2 released.
@@ -18,4 +24,4 @@
 	* First release for testing.
 
 
-Copyright 2015 T+A elektroakustik GmbH & Co. KG
+Copyright 2015, 2016 T+A elektroakustik GmbH & Co. KG
