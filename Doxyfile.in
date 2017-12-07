@@ -795,6 +795,7 @@ RECURSIVE              = YES
 
 EXCLUDE                = \
     @abs_builddir@/filetransfer_dbus.c \
+    @abs_srcdir@/dbus_interfaces/de_tahifi_artcache_errors.hh \
     @abs_srcdir@/dbus_interfaces/de_tahifi_lists_errors.hh \
     @abs_srcdir@/dbus_interfaces/*.xml
 
