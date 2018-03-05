@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2015  T+A elektroakustik GmbH & Co. KG
+# Copyright (C) 2015, 2018  T+A elektroakustik GmbH & Co. KG
 #
 # This file is part of D-Bus DL.
 #
@@ -49,7 +49,9 @@ libfiletransfer_dbus_la_CFLAGS = $(CRELAXEDWARNINGS)
 
 libevents_la_SOURCES = events.c events.h xferitem.c xferitem.h
 
+if WITH_MARKDOWN
 html_DATA = README.html
+endif
 
 EXTRA_DIST = README.md
 
