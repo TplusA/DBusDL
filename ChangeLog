@@ -1,3 +1,13 @@
+2019-08-27  Robert Tiemann  <r.tiemann@ta-hifi.de>
+
+	* Version 2.0 released.
+
+	* HTTP: Set maximum number of redirects to 5.
+
+	* Misc: Fix compilation error with libcurl 7.62.0 and later.
+
+	* Licensing: Changed license from GPLv3+ to GPLv2+.
+
 2018-03-06  Robert Tiemann  <r.tiemann@ta-hifi.de>
 
 	* Version 1.4 released.
@@ -32,4 +42,4 @@
 	* First release for testing.
 
 
-Copyright 2015, 2016, 2018 T+A elektroakustik GmbH & Co. KG
+Copyright 2015, 2016, 2018, 2019 T+A elektroakustik GmbH & Co. KG
