@@ -290,7 +290,7 @@ static enum DBusListsErrorCode do_download(const struct XferItem *const item,
 
     curl_easy_setopt(rx, CURLOPT_URL, item->url);
     curl_easy_setopt(rx, CURLOPT_FOLLOWLOCATION, 1L);
-    curl_easy_setopt(rx, CURLOPT_MAXREDIRS, 2L);
+    curl_easy_setopt(rx, CURLOPT_MAXREDIRS, 5L);
     curl_easy_setopt(rx, CURLOPT_WRITEFUNCTION, NULL);
     curl_easy_setopt(rx, CURLOPT_WRITEDATA, output_file);
     curl_easy_setopt(rx, CURLOPT_XFERINFOFUNCTION, progress_callback);
