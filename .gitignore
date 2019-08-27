@@ -6,6 +6,9 @@
 /configure
 /cscope.out
 /tags
+/GPATH
+/GRTAGS
+/GTAGS
 /types_c.taghl
 /types_py.taghl
 Makefile.in
