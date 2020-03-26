@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, 2019  T+A elektroakustik GmbH & Co. KG
+ * Copyright (C) 2015, 2019, 2020  T+A elektroakustik GmbH & Co. KG
  *
  * This file is part of D-Bus DL.
  *
@@ -22,7 +22,7 @@
 #ifndef DBUS_HANDLERS_H
 #define DBUS_HANDLERS_H
 
-#include "filetransfer_dbus.h"
+#include "de_tahifi_filetransfer.h"
 
 #ifdef __cplusplus
 extern "C" {

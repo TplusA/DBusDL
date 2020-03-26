@@ -788,7 +788,7 @@ RECURSIVE              = YES
 # run.
 
 EXCLUDE                = \
-    @abs_builddir@/filetransfer_dbus.c \
+    @abs_builddir@/de_tahifi_filetransfer.c \
     @abs_srcdir@/dbus_interfaces/de_tahifi_artcache_errors.hh \
     @abs_srcdir@/dbus_interfaces/de_tahifi_lists_errors.hh \
     @abs_srcdir@/dbus_interfaces/*.xml

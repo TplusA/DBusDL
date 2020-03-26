@@ -48,7 +48,7 @@ dbusdl_SOURCES = \
 
 dbusdl_LDADD = $(noinst_LTLIBRARIES) $(DBUSDL_DEPENDENCIES_LIBS)
 
-nodist_libfiletransfer_dbus_la_SOURCES = filetransfer_dbus.c filetransfer_dbus.h
+nodist_libfiletransfer_dbus_la_SOURCES = de_tahifi_filetransfer.c de_tahifi_filetransfer.h
 libfiletransfer_dbus_la_CFLAGS = $(CRELAXEDWARNINGS)
 
 libevents_la_SOURCES = events.c events.h xferitem.c xferitem.h
@@ -67,9 +67,9 @@ EXTRA_DIST += \
 
 BUILT_SOURCES = \
     $(nodist_libfiletransfer_dbus_la_SOURCES) \
-    de_tahifi_filetransfer.h \
-    de_tahifi_filetransfer.md \
-    filetransfer_dbus.stamp \
+    de_tahifi_filetransfer-doc.h \
+    de_tahifi_filetransfer-doc.md \
+    de_tahifi_filetransfer.stamp \
     versioninfo.cache \
     versioninfo.h
 
@@ -82,11 +82,11 @@ versioninfo.h: versioninfo.cache
 	$(MARKDOWN) $< >$@
 
 
-de_tahifi_filetransfer.h: filetransfer_dbus.stamp
-de_tahifi_filetransfer.md: filetransfer_dbus.stamp
-filetransfer_dbus.c: filetransfer_dbus.stamp
-filetransfer_dbus.h: filetransfer_dbus.stamp
-filetransfer_dbus.stamp: $(DBUS_IFACES)/de_tahifi_filetransfer.xml
-	$(GDBUS_CODEGEN) --generate-c-code=filetransfer_dbus --c-namespace tdbus --interface-prefix de.tahifi. $<
-	$(DBUS_IFACES)/extract_documentation.py -i $< -o de_tahifi_filetransfer.md -H de_tahifi_filetransfer.h -c tdbus -s de.tahifi. -n "$(PACKAGE_NAME) (transferring files across the internet)"
+de_tahifi_filetransfer-doc.h: de_tahifi_filetransfer.stamp
+de_tahifi_filetransfer-doc.md: de_tahifi_filetransfer.stamp
+de_tahifi_filetransfer.c: de_tahifi_filetransfer.stamp
+de_tahifi_filetransfer.h: de_tahifi_filetransfer.stamp
+de_tahifi_filetransfer.stamp: $(DBUS_IFACES)/de_tahifi_filetransfer.xml
+	$(GDBUS_CODEGEN) --generate-c-code=de_tahifi_filetransfer --c-namespace tdbus --interface-prefix de.tahifi. $<
+	$(DBUS_IFACES)/extract_documentation.py -i $< -o de_tahifi_filetransfer-doc.md -H de_tahifi_filetransfer-doc.h -c tdbus -s de.tahifi. -n "$(PACKAGE_NAME) (transferring files across the internet)"
 	touch $@
