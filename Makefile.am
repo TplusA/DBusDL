@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2015, 2018, 2019  T+A elektroakustik GmbH & Co. KG
+# Copyright (C) 2015, 2018, 2019, 2020  T+A elektroakustik GmbH & Co. KG
 #
 # This file is part of D-Bus DL.
 #
@@ -41,6 +41,7 @@ dbusdl_SOURCES = \
     dbusdl.c \
     events.h xferitem.h xferthread.c xferthread.h \
     messages.h messages.c \
+    backtrace.h backtrace.c \
     os.h os.c \
     dbus_interfaces/de_tahifi_lists_errors.h \
     dbus_iface.c dbus_iface.h dbus_handlers.c dbus_handlers.h
