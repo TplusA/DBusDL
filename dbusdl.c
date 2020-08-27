@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, 2019  T+A elektroakustik GmbH & Co. KG
+ * Copyright (C) 2015, 2019, 2020  T+A elektroakustik GmbH & Co. KG
  *
  * This file is part of D-Bus DL.
  *
@@ -71,10 +71,9 @@ static int setup(bool run_in_foreground)
     msg_enable_syslog(!run_in_foreground);
 
     if(!run_in_foreground)
+    {
         openlog("dbusdl", LOG_PID, LOG_DAEMON);
 
-    if(!run_in_foreground)
-    {
         if(daemon(0, 0) < 0)
         {
             msg_error(errno, LOG_EMERG, "Failed to run as daemon");
