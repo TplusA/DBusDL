@@ -20,7 +20,7 @@
 #
 
 project('DBusDL', ['cpp', 'c'],
-    version: '2.0',
+    version: '2.1',
     default_options: ['warning_level=3', 'cpp_std=c++14', 'buildtype=plain'])
 
 PACKAGE = 'dbusdl'
