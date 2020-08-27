@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, 2019  T+A elektroakustik GmbH & Co. KG
+ * Copyright (C) 2015, 2019, 2020  T+A elektroakustik GmbH & Co. KG
  *
  * This file is part of D-Bus DL.
  *
@@ -167,6 +167,12 @@ static enum DBusListsErrorCode map_curl_error_to_list_error(CURLcode error)
       case CURLE_REMOTE_FILE_EXISTS:
       case CURLE_REMOTE_FILE_NOT_FOUND:
       case CURLE_SSH:
+#if LIBCURL_VERSION_NUM >= 0x074400
+      case CURLE_HTTP3:
+#endif /* version 7.68.0 and up */
+#if LIBCURL_VERSION_NUM >= 0x074500
+      case CURLE_QUIC_CONNECT_ERROR:
+#endif /* version 7.69.0 and up */
         return LIST_ERROR_NET_IO;
 
       case CURLE_UNSUPPORTED_PROTOCOL:
@@ -227,6 +233,9 @@ static enum DBusListsErrorCode map_curl_error_to_list_error(CURLcode error)
 #if LIBCURL_VERSION_NUM >= 0x072900
       case CURLE_SSL_INVALIDCERTSTATUS:
 #endif /* version 7.41.0 and up */
+#if LIBCURL_VERSION_NUM >= 0x074200
+      case CURLE_AUTH_ERROR:
+#endif /* version 7.66.0 and up */
         return LIST_ERROR_AUTHENTICATION;
 
       case CURLE_FAILED_INIT:
