@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, 2019, 2020  T+A elektroakustik GmbH & Co. KG
+ * Copyright (C) 2015, 2019, 2020, 2021  T+A elektroakustik GmbH & Co. KG
  *
  * This file is part of D-Bus DL.
  *
@@ -167,18 +167,26 @@ static enum DBusListsErrorCode map_curl_error_to_list_error(CURLcode error)
       case CURLE_REMOTE_FILE_EXISTS:
       case CURLE_REMOTE_FILE_NOT_FOUND:
       case CURLE_SSH:
-#if LIBCURL_VERSION_NUM >= 0x074400
+#if CURL_AT_LEAST_VERSION(7, 68, 0)
       case CURLE_HTTP3:
 #endif /* version 7.68.0 and up */
-#if LIBCURL_VERSION_NUM >= 0x074500
+#if CURL_AT_LEAST_VERSION(7, 69, 0)
       case CURLE_QUIC_CONNECT_ERROR:
 #endif /* version 7.69.0 and up */
+#if CURL_AT_LEAST_VERSION(7, 73, 0)
+      case CURLE_PROXY:
+#endif /* version 7.73.0 and up */
         return LIST_ERROR_NET_IO;
 
       case CURLE_UNSUPPORTED_PROTOCOL:
       case CURLE_URL_MALFORMAT:
       case CURLE_NOT_BUILT_IN:
+#if !CURL_AT_LEAST_VERSION(7, 51, 0)
       case CURLE_FTP_WEIRD_SERVER_REPLY:
+#endif /* removed 7.51.0 */
+#if CURL_AT_LEAST_VERSION(7, 51, 0)
+      case CURLE_WEIRD_SERVER_REPLY:
+#endif /* version 7.51.0 and up */
       case CURLE_FTP_ACCEPT_FAILED:
       case CURLE_FTP_WEIRD_PASS_REPLY:
       case CURLE_FTP_WEIRD_PASV_REPLY:
@@ -208,7 +216,7 @@ static enum DBusListsErrorCode map_curl_error_to_list_error(CURLcode error)
       case CURLE_RTSP_CSEQ_ERROR:
       case CURLE_RTSP_SESSION_ERROR:
       case CURLE_FTP_BAD_FILE_LIST:
-#if LIBCURL_VERSION_NUM >= 0x073100
+#if CURL_AT_LEAST_VERSION(7, 49, 0)
       case CURLE_HTTP2_STREAM:
 #endif /* version 7.49.0 and up */
         return LIST_ERROR_PROTOCOL;
@@ -219,7 +227,7 @@ static enum DBusListsErrorCode map_curl_error_to_list_error(CURLcode error)
       case CURLE_PEER_FAILED_VERIFICATION:
       case CURLE_SSL_CERTPROBLEM:
       case CURLE_SSL_CIPHER:
-#if LIBCURL_VERSION_NUM < 0x073E00
+#if !CURL_AT_LEAST_VERSION(7, 62, 0)
       case CURLE_SSL_CACERT:
 #endif /* removed in version 7.62.0 */
       case CURLE_USE_SSL_FAILED:
@@ -227,15 +235,18 @@ static enum DBusListsErrorCode map_curl_error_to_list_error(CURLcode error)
       case CURLE_TFTP_PERM:
       case CURLE_TFTP_NOSUCHUSER:
       case CURLE_SSL_ISSUER_ERROR:
-#if LIBCURL_VERSION_NUM >= 0x072700
+#if CURL_AT_LEAST_VERSION(7, 39, 0)
       case CURLE_SSL_PINNEDPUBKEYNOTMATCH:
 #endif /* version 7.39.0 and up */
-#if LIBCURL_VERSION_NUM >= 0x072900
+#if CURL_AT_LEAST_VERSION(7, 41, 0)
       case CURLE_SSL_INVALIDCERTSTATUS:
 #endif /* version 7.41.0 and up */
-#if LIBCURL_VERSION_NUM >= 0x074200
+#if CURL_AT_LEAST_VERSION(7, 66, 0)
       case CURLE_AUTH_ERROR:
 #endif /* version 7.66.0 and up */
+#if CURL_AT_LEAST_VERSION(7, 77, 0)
+      case CURLE_SSL_CLIENTCERT:
+#endif /* version 7.77.0 and up */
         return LIST_ERROR_AUTHENTICATION;
 
       case CURLE_FAILED_INIT:
@@ -261,11 +272,11 @@ static enum DBusListsErrorCode map_curl_error_to_list_error(CURLcode error)
       case CURLE_OBSOLETE44:
       case CURLE_OBSOLETE46:
       case CURLE_OBSOLETE50:
-#if LIBCURL_VERSION_NUM >= 0x073E00
+#if CURL_AT_LEAST_VERSION(7, 62, 0)
       case CURLE_OBSOLETE51:
 #endif /* version 7.62.0 and up */
       case CURLE_OBSOLETE57:
-#if LIBCURL_VERSION_NUM >= 0x073B00
+#if CURL_AT_LEAST_VERSION(7, 59, 0)
       case CURLE_RECURSIVE_API_CALL:
 #endif /* version 7.59.0 and up */
       case CURL_LAST:
