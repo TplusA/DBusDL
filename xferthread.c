@@ -358,11 +358,11 @@ static enum DBusListsErrorCode do_download(const struct XferItem *const item,
     else
     {
         if(rx_result != CURLE_ABORTED_BY_CALLBACK)
-            msg_error(0, LOG_ERR, "Failed downloading file: %s (%s)",
-                      error_buffer, curl_easy_strerror(rx_result));
+            msg_error(0, LOG_ERR, "Failed downloading file %s: %s (%s)",
+                      filename, error_buffer, curl_easy_strerror(rx_result));
         else
         {
-            msg_info("Download canceled as requested");
+            msg_info("Download canceled as requested (%s)", filename);
             error = LIST_ERROR_INTERRUPTED;
         }
 
