@@ -1,3 +1,11 @@
+2021-11-25  Robert Tiemann  <r.tiemann@ta-hifi.de>
+
+	* Version 2.2 released.
+
+	* Logging: Show URL of failing downloads.
+
+	* Misc: Maintenance, support more recent versions of cURL.
+
 2020-08-27  Robert Tiemann  <r.tiemann@ta-hifi.de>
 
 	* Version 2.1 released.
@@ -50,4 +58,4 @@
 	* First release for testing.
 
 
-Copyright 2015, 2016, 2018, 2019, 2020 T+A elektroakustik GmbH & Co. KG
+Copyright 2015, 2016, 2018, 2019, 2020, 2021 T+A elektroakustik GmbH & Co. KG

@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2020  T+A elektroakustik GmbH & Co. KG
+# Copyright (C) 2020, 2021  T+A elektroakustik GmbH & Co. KG
 #
 # This file is part of D-Bus DL.
 #
@@ -20,7 +20,7 @@
 #
 
 project('DBusDL', ['cpp', 'c'],
-    version: '2.1',
+    version: '2.2',
     default_options: ['warning_level=3', 'cpp_std=c++14', 'buildtype=plain'])
 
 PACKAGE = 'dbusdl'
