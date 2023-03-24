@@ -11,4 +11,5 @@
 /GTAGS
 /types_c.taghl
 /types_py.taghl
+/.gitreview
 Makefile.in
