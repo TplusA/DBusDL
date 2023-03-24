@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2015, 2018, 2019, 2020  T+A elektroakustik GmbH & Co. KG
+# Copyright (C) 2015, 2018--2020, 2023  T+A elektroakustik GmbH & Co. KG
 #
 # This file is part of D-Bus DL.
 #
@@ -57,7 +57,7 @@ if WITH_MARKDOWN
 html_DATA = README.html
 endif
 
-EXTRA_DIST = README.md
+EXTRA_DIST = README.md cppcheck_suppressed.txt
 
 CLEANFILES = README.html
 
