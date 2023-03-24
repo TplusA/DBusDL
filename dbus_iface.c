@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, 2019, 2020  T+A elektroakustik GmbH & Co. KG
+ * Copyright (C) 2015, 2019, 2020, 2023  T+A elektroakustik GmbH & Co. KG
  *
  * This file is part of D-Bus DL.
  *
@@ -159,7 +159,7 @@ int dbus_setup(GMainLoop *loop, const char *bus_name)
                        bus_acquired, name_acquired, name_lost, &dbus_data,
                        destroy_notification);
 
-    log_assert(dbus_data.owner_id != 0);
+    msg_log_assert(dbus_data.owner_id != 0);
 
     while(dbus_data.owner_id == 0 || dbus_data.name_acquired == 0)
     {

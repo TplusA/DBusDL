@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, 2019  T+A elektroakustik GmbH & Co. KG
+ * Copyright (C) 2015, 2019, 2023  T+A elektroakustik GmbH & Co. KG
  *
  * This file is part of D-Bus DL.
  *
@@ -57,7 +57,7 @@ static uint32_t next_id(void)
 
 void xferitem_init(const char *download_path, bool create_path)
 {
-    log_assert(download_path != NULL);
+    msg_log_assert(download_path != NULL);
 
     xferitem_data.download_path = download_path;
     xferitem_data.tempfile_path = construct_path(download_path, 0);
@@ -79,7 +79,7 @@ void xferitem_deinit(void)
 
 struct XferItem *xferitem_allocate(const char *url, uint32_t ticks)
 {
-    log_assert(url != NULL);
+    msg_log_assert(url != NULL);
 
     struct XferItem *const item = g_try_malloc(sizeof(*item));
 
@@ -116,6 +116,6 @@ void xferitem_free(struct XferItem *item)
 
 const char *xferitem_get_tempfile_path(void)
 {
-    log_assert(xferitem_data.tempfile_path != NULL);
+    msg_log_assert(xferitem_data.tempfile_path != NULL);
     return xferitem_data.tempfile_path;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, 2019, 2020, 2021  T+A elektroakustik GmbH & Co. KG
+ * Copyright (C) 2015, 2019--2021, 2023  T+A elektroakustik GmbH & Co. KG
  *
  * This file is part of D-Bus DL.
  *
@@ -388,7 +388,7 @@ static enum DBusListsErrorCode do_download(const struct XferItem *const item,
  */
 static struct EventFromUser *download(struct XferItem *item)
 {
-    log_assert(item != NULL);
+    msg_log_assert(item != NULL);
 
     msg_info("Start downloading URL \"%s\", ID %u", item->url, item->item_id);
 
@@ -457,7 +457,7 @@ static GThread *thread;
 
 void xferthread_init(void)
 {
-    log_assert(thread == NULL);
+    msg_log_assert(thread == NULL);
 
     curl_global_init(CURL_GLOBAL_DEFAULT);
     thread = g_thread_new("Transfer thread", xferthread_main, NULL);
@@ -465,7 +465,7 @@ void xferthread_init(void)
 
 void xferthread_deinit(void)
 {
-    log_assert(thread != NULL);
+    msg_log_assert(thread != NULL);
 
     unsigned int tries = 10;
 

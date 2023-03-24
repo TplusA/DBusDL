@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015, 2019  T+A elektroakustik GmbH & Co. KG
+ * Copyright (C) 2015, 2019, 2023  T+A elektroakustik GmbH & Co. KG
  *
  * This file is part of D-Bus DL.
  *
@@ -93,9 +93,9 @@ struct EventFromUser *events_from_user_new_shutdown(void)
 
 struct EventFromUser *events_from_user_new_start_download(struct XferItem *item)
 {
-    log_assert(item != NULL);
-    log_assert(item->item_id > 0);
-    log_assert(item->url != NULL);
+    msg_log_assert(item != NULL);
+    msg_log_assert(item->item_id > 0);
+    msg_log_assert(item->url != NULL);
 
     struct EventFromUser *ev = alloc_from_user(EVENT_FROM_USER_START_DOWNLOAD);
 
@@ -117,7 +117,7 @@ struct EventFromUser *events_from_user_new_cancel(uint32_t item_id)
 
 void events_from_user_send(struct EventFromUser *event)
 {
-    log_assert(event != NULL);
+    msg_log_assert(event != NULL);
 
     g_async_queue_push(events_data.from_user_to_thread_queue, event);
 }
@@ -178,7 +178,7 @@ struct EventToUser *events_to_user_new_done(struct XferItem *item,
 
 void events_to_user_send(struct EventToUser *event)
 {
-    log_assert(event != NULL);
+    msg_log_assert(event != NULL);
 
     g_async_queue_push(events_data.from_thread_to_user_queue, event);
 
