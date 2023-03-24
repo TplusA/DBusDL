@@ -279,6 +279,9 @@ static enum DBusListsErrorCode map_curl_error_to_list_error(CURLcode error)
 #if CURL_AT_LEAST_VERSION(7, 59, 0)
       case CURLE_RECURSIVE_API_CALL:
 #endif /* version 7.59.0 and up */
+#if CURL_AT_LEAST_VERSION(7, 84, 0)
+      case CURLE_UNRECOVERABLE_POLL:
+#endif /* version 7.84.0 and up */
       case CURL_LAST:
         break;
     }
